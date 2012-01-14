@@ -12,7 +12,7 @@ class Game(object):
 	NUM_OF_TANKS = 30
 	NUM_OF_WINNERS = 5
 	MUTATION_RATE = 0.15 # Out of 100
-	ROUND_TIME = 60 # in seconds
+	ROUND_TIME = 40 # in seconds
 
 	def __init__(self):
 		self.window = pygame.display.set_mode((1280, 1024))
@@ -23,6 +23,9 @@ class Game(object):
 		self.clock.tick(200)
 		self.time = 0
 		self.generation = 1
+		self.abs_highscore = 0
+
+		pygame.display.set_caption ("Evolution v1")
 
 		try:
 			text = open("data.evo", "r")
@@ -114,7 +117,9 @@ class Game(object):
 		for highscore in self.get_highscores():
 			tmpscore = max(tmpscore, highscore.score)
 
-		rendered_text = self.text_renderer.render("Generation: "+str(self.generation)+"; Time left until change:"+str(round((self.ROUND_TIME*1000-self.time)/1000))+"; Highest Score this gen:"+str(tmpscore), 1, (0, 0, 255))
+		self.abs_highscore = max(self.abs_highscore, tmpscore)
+
+		rendered_text = self.text_renderer.render("Generation: "+str(self.generation)+"; Time left until change:"+str(round((self.ROUND_TIME*1000-self.time)/1000))+"; Highest Score this gen:"+str(tmpscore)+"; Absolute highest score:"+str(self.abs_highscore), 1, (0, 0, 255))
 		textpos = rendered_text.get_rect(centerx=self.window.get_width()/2)
 		self.surface.blit(rendered_text, textpos)
 
