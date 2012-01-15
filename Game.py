@@ -11,8 +11,8 @@ class Game(object):
 	NUM_OF_FOOD = 40
 	NUM_OF_TANKS = 30
 	NUM_OF_WINNERS = 5
-	MUTATION_RATE = 0.15 # Out of 100
-	ROUND_TIME = 40 # in seconds
+	MUTATION_RATE = 0.2 # Out of 100
+	ROUND_TIME = 60 # in seconds
 
 	def __init__(self):
 		self.window = pygame.display.set_mode((1280, 1024))
@@ -46,7 +46,8 @@ class Game(object):
 			if len(best_brains) == 0:
 				tank = Tank(self, x, y)
 			else:
-				tank = Tank(self, x, y, random.choice(best_brains))
+				print [random.choice(best_brains)[:]]
+				tank = Tank(self, x, y, random.choice(best_brains)[:])
 
 	def createfood(self):
 		x = random.randint(0, self.surface.get_width())
@@ -63,8 +64,6 @@ class Game(object):
 		for i in range(num_of_entities):
 			entity = self.entitylist.pop(0)
 			entity.destroy(self)
-
-		print len(self.entitylist), num_of_entities
 
 		for i in range(self.NUM_OF_TANKS):
 			weightlist = []

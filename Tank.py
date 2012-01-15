@@ -80,11 +80,15 @@ class Tank(GameObject):
 
 
 	def draw(self, game):
-		rect = pygame.Rect(self.x, self.y, self.size, self.size)
+		rect = pygame.Rect(0, 0, self.size, self.size)
+		rect.center = (self.x, self.y)
 		if self in game.get_highscores():
-			pygame.draw.rect(game.surface, (255, 255, 0), rect)# Yellow
+			color = (255, 255, 0)# Yellow
 		else:
-			pygame.draw.rect(game.surface, self.color, rect)
+			color = self.color# Red
+
+		pygame.draw.rect(game.surface, color, rect)
+		pygame.draw.line(game.surface, color, (self.x, self.y), (self.x+math.cos(self.direction)*(self.size+10), self.y+math.sin(self.direction)*(self.size+10)))
 
 
 	def destroy(self, game):
