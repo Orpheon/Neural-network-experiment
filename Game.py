@@ -46,7 +46,6 @@ class Game(object):
 			if len(best_brains) == 0:
 				tank = Tank(self, x, y)
 			else:
-				print [random.choice(best_brains)[:]]
 				tank = Tank(self, x, y, random.choice(best_brains)[:])
 
 	def createfood(self):
