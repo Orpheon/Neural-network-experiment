@@ -1,7 +1,7 @@
 from __future__ import division
 import math, sys, os, time, random, pickle
 import pygame
-from pygame import *
+from pygame.locals import *
 
 from Tank import Tank
 from Objects import Food
@@ -92,6 +92,8 @@ class Game(object):
 		self.time += self.clock.get_time()
 		if self.time > self.ROUND_TIME*1000:
 			self.restartmatch()
+
+		pygame.event.clear()
 
 	def get_highscores(self):
 		highscores = []

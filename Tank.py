@@ -1,7 +1,7 @@
 from __future__ import division
 import math, sys, os, time, random
 import pygame
-from pygame import *
+from pygame.locals import *
 
 from Objects import GameObject, Food
 from NeuralNet import NeuralNet
